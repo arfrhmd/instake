@@ -37,6 +37,9 @@ Profile_picture() {
     esac
 }
 
+if [[ ! -d "${output_dir}/profile" ]]; then
+    mkdir "${output_dir}/profile"
+fi
 echo -ne "${GREEN}[>]${CYAN} Insert username : "
 read usrname
 
