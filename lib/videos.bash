@@ -43,6 +43,9 @@ Videos() {
     esac
 }
 
+if [[ ! -d "${output_dir}/videos" ]]; then
+    mkdir "${output_dir}/videos"
+fi
 echo -ne "${GREEN}[>]${CYAN} Insert URL : "
 read url
 
