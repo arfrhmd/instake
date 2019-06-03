@@ -26,15 +26,22 @@ update() {
     
     # PROFILE_PIC SECTION
     local profile_pic=$(curl -s "$propic" | md5sum | awk '{print $1}')
-    if [[ ! $videos == $(md5sum lib/videos.bash | awk '{print $1}') ]]; then
-        curl -s "$propic" -o lib/videos.bash
+    if [[ ! $profile_pic == $(md5sum lib/profile_picture.bash | awk '{print $1}') ]]; then
+        curl -s "$propic" -o lib/profile_picture.bash
         echo -e "${YELLOW}[+]${GREEN} profile_picture.bash updated"
     fi
     
     # UPDATE SECTION
     local uptodate=$(curl -s "$update" | md5sum | awk '{print $1}')
-    if [[ ! $uptodate == $(md5sum lib/videos.bash | awk '{print $1}') ]]; then
+    if [[ ! $uptodate == $(md5sum lib/update.bash | awk '{print $1}') ]]; then
         curl -s "$update" -o lib/update.bash
+        echo -e "${YELLOW}[+]${GREEN} update.bash updated"
+    fi
+    
+    # ABOUT SECTION
+    local abouts=$(curl -s "$about" | md5sum | awk '{print $1}')
+    if [[ ! $abouts == $(md5sum lib/about.bash | awk '{print $1}') ]]; then
+        curl -s "$about" -o lib/about.bash
         echo -e "${YELLOW}[+]${GREEN} update.bash updated"
     fi
     
