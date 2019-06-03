@@ -19,6 +19,10 @@ $ bash index.bash
 
 ## Release History
 
+* 0.1.5
+    * RENAME: `update.bsh` to `update.bash` (typo)
+    * FIX: fix `Photos()` which is failed to get content
+    * FIX: fix `update()`
 * 0.1.0
     * The first proper release
 * 0.0.1
