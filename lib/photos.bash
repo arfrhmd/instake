@@ -14,16 +14,23 @@ Photos() {
     fi
     local username=$(echo "$data" | grep -Po '"username":"\K[^"]*' | tail -1)
     echo -e "${GREEN}[-]${CYAN} Posted by ${YELLOW}$username"
-    local get=$(echo "$data" | grep -Po '750},{"src":"\K[^"]*' | sed 's/\\u00.*//g' | sort -u)
+    local get=$(echo "$data" | grep -Po '{"src":"\K[^}]*' | grep '1080' | sed 's/\\u00.*//g' | sort -u)
+    if [[ -z "$get" ]]; then
+        echo -e "${RED}[-]${YELLOW} Failed to get content ${N}"
+        exit 0
+    fi
     local count=$(echo "$get" | wc -l)
     echo -e "${GREEN}[-]${CYAN} Total media : ${YELLOW}$count"
     echo -e "${GREEN}[-]${CYAN} Output directory : ${YELLOW}${output_dir}/photos"
     echo -e "${GREEN}[-]${CYAN} Starting download ..."
     for i in ${get}; do
-        local name=$(echo "$i" | awk -F/ '{print $9}')
-        name2=$(echo "$name" | sed 's/?.*//g')
-        curl -s -A "$useragent" "$i" -o "${output_dir}/photos/${username}_${name2}"
-        echo -e "${GREEN}[-]${CYAN} Saved : ${YELLOW}${username}_${name2}"
+        local name=$(echo "$i" | awk -F/ '{print $9}' | sed 's/?.*//g')
+        if [[ $(echo -n "$name" | wc -m) -lt 50 ]]; then
+           local name=$(echo -n "$i" | awk -F/ '{print $10}' | sed 's/?.*//g')
+        fi
+        local name2=$(echo "${name: 26}" | sed 's/.jpg//g')
+        curl -s -A "$useragent" "$i" -o "${output_dir}/photos/${username}_${name2}.jpg"
+        echo -e "${GREEN}[-]${CYAN} Saved : ${YELLOW}${username}_${name2}.jpg"
     done
     echo -e "${GREEN}[~]${CYAN} DONE \n"
     echo -ne "${Y1}[c]${CYAN}ontinue/${P1}[e]${CYAN}xit : "
@@ -43,6 +50,9 @@ Photos() {
     esac
 }
 
+if [[ ! -d "${output_dir}/photos" ]]; then
+    mkdir "${output_dir}/photos"
+fi
 echo -ne "${GREEN}[>]${CYAN} Insert URL : "
 read url
 
