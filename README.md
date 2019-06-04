@@ -17,6 +17,17 @@ $ cd instake
 $ bash index.bash
 ```
 
+## Configuration
+
+You can configure the output directory in `index.bash` :
+
+```sh
+##### CONFIG #####
+useragent=[USER AGENT STRING]
+output_dir=[OUTPUT DIRECTORY] # default "." (current directory)
+##################
+```
+
 ## Release History
 
 * 0.1.5
