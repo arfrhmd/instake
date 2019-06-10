@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/wayangcode/instake.svg)
 ![GPLv3.0](https://img.shields.io/github/license/wayangcode/instake.svg)
 
-[![asciicast](https://asciinema.org/a/KJ157cF2Dkd1szulfX6TDiACx.svg)](https://asciinema.org/a/KJ157cF2Dkd1szulfX6TDiACx)
+[![asciicast](https://asciinema.org/a/de1WTCUv6NyHbXUZk6Oao2Lcm.svg)](https://asciinema.org/a/de1WTCUv6NyHbXUZk6Oao2Lcm)
 
 ## How to Run
 
